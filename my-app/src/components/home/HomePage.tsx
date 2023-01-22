@@ -122,9 +122,7 @@ const HomePage = () => {
           >
 
           <div className="mb-3 p-3 w-25">
-            <label htmlFor="name" className="form-label">
-              Назва
-            </label>
+            <label htmlFor="name" className="form-label">Назва</label>
             <input
               type="text"
               id="name"
