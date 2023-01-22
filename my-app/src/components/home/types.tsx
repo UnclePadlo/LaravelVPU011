@@ -13,6 +13,11 @@ export interface IProductResponse{
     last_page: number
 }
 
+export interface ISearchProduct {
+    name?: string,
+    page?: number|string|null;
+}
+
 //Експорт интерфейсу
 export interface IProductState {
     list: Array<IProductItem>,
