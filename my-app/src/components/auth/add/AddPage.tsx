@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import http from "../../../http_common";
 import { IAddProduct } from "../../home/types";
 
@@ -9,9 +10,13 @@ const AddPage =() =>{
         name: "",
         detail: "",
     });
+
+    const navigator = useNavigate();
+
     const onSubmit = (values: IAddProduct) =>{
         http.post("/api/products", values).then(resp =>{
-            console.log(resp);
+            //console.log(resp);
+            navigator("/");
         })
     };
 
@@ -29,7 +34,7 @@ const AddPage =() =>{
                 <div className="input-group-prepend">
                     <span className="input-group-text">Назва</span>
                 </div>
-                <input className="form-control" aria-label="With textarea"/>
+                <input type="text" id="name" name="name" className="form-control" value={formik.values.name} onChange={formik.handleChange} aria-label="With textarea"/>
             </div>
             
             <br></br>
@@ -38,12 +43,12 @@ const AddPage =() =>{
                 <div className="input-group-prepend">
                     <span className="input-group-text">Деталі</span>
                 </div>
-                <input className="form-control" aria-label="With textarea"/>
+                <input type="text" id="detail" name="detail" className="form-control" value={formik.values.detail} onChange={formik.handleChange}  aria-label="With textarea"/>
             </div>
 
             <br></br>
             
-            <button type="button" className="btn btn-success">Додати</button>
+            <button type="submit" className="btn btn-success">Додати</button>
 
         </form>
         </>

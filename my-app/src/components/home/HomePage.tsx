@@ -57,9 +57,25 @@ const HomePage = () => {
   });
 
   const deleteProduct = (id: number) =>{
-    console.log(id);
-    
+
+    http.delete("/api/products" + id).then( resp =>{
+      http.get<IProductResponse>("/api/products?page="+search.page).then((resp)=>{
+        const action : GetProductAction = {
+          type: ProductActionTypes.GET_PRODUCTS,
+          payload: {
+            list: resp.data.data,
+            
+            count_page: resp.data.last_page,
+            current_page: resp.data.current_page,
+            total: resp.data.total
+          }
+        }
+        dispatch(action);
+      })
+      console.log(resp);
+    });
   }
+
 //використання функції до кожного елементу списка
   const data = list.map((product) => (
     <tr key={product.id}>
